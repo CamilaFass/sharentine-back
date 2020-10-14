@@ -20,10 +20,18 @@ const UserSchema = new Schema(
       type: String,
       required: [true]
     },
+
     image: {
       type: String,
       default: ''
-    }
+    },
+
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
   },
   { timestamps: true }
 );
