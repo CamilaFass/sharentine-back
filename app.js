@@ -10,12 +10,16 @@ app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' }));
 
 const authRouter = require('./routes/auth.routes');
+const postRouter = require('./routes/post.routes');
+const commentRouter = require('./routes/comment.routes');
 
 require('./configs/db.config');
 
 require('./configs/passport.config')(app);
 
 app.use('/api', authRouter);
+app.use('/api', postRouter);
+app.use('/api', commentRouter);
 
 app.use('/api', require('./routes/file-upload-routes'));
 

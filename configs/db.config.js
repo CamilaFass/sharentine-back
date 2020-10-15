@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose
-  .connect('mongodb://localhost/project-management-app', {
+  .connect('mongodb://localhost/sharentine-app', {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,

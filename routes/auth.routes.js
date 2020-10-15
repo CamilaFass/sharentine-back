@@ -8,13 +8,6 @@ const uploader = require('../configs/cloudinary.config');
 const User = require('../models/User.model');
 
 //Rota de signup:
-
-router.get('/teste', (req, res) => {
-  return res.json({
-    user: 'teste1'
-  });
-});
-
 router.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
   console.log(req.body);
