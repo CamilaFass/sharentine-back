@@ -11,10 +11,11 @@ const Post = require("../models/Post.model");
 router.post("/post/:userId", passport.authenticate("jwt", { session: false }), async (req, res) => {
   try {
     console.log("Post BODY =>", req.body);
+    const { userId } = req.params;
 
-    const resultPost = await Post.create(req.body);
+    const resultPost = await Post.create({...req.body, userId: userId});
 
-    const resultUser = await User.findOneAndUpdate({ _id: req.params.userId }, { $push: { posts: resultPost._id } }, { new: true });
+    const resultUser = await User.findOneAndUpdate({ _id: userId }, { $push: { posts: resultPost._id } }, { new: true });
 
     console.log(resultPost);
     return res.status(201).json({ created: { resultPost, resultUser } });
@@ -27,7 +28,7 @@ router.post("/post/:userId", passport.authenticate("jwt", { session: false }), a
 //Read post:
 router.get("/post", passport.authenticate("jwt", { session: false }), async (req, res) => {
   try {
-    const result = await Post.find();
+    const result = await Post.find().populate("userId");
 
     if (result) {
       return res.status(200).json(result);
