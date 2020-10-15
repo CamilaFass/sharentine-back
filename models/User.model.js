@@ -10,8 +10,8 @@ const UserSchema = new Schema(
 
     lastName: {
       type: String,
-      trim: true,
-      required: [false]
+      trim: true
+      // default: ''
     },
 
     email: {
@@ -30,6 +30,7 @@ const UserSchema = new Schema(
     location: {
       type: String,
       trim: false
+      // default: ''
     },
 
     image: {
