@@ -100,6 +100,17 @@ router.get(
   }
 );
 
+router.get(
+  '/profile-edit',
+  passport.authenticate('jwt', { session: false }),
+  (req, res, next) => {
+    res.json({
+      user: req.user,
+      token: req.query.secret_token
+    });
+  }
+);
+
 //Rota de edit:
 
 router.patch(

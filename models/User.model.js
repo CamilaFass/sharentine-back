@@ -21,6 +21,11 @@ const UserSchema = new Schema(
       required: [true]
     },
 
+    location: {
+      type: String,
+      trim: false
+    },
+
     image: {
       type: String,
       default: ''
@@ -29,9 +34,9 @@ const UserSchema = new Schema(
     posts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Post",
-      },
-    ],
+        ref: 'Post'
+      }
+    ]
   },
   { timestamps: true }
 );
