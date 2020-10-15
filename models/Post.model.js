@@ -24,7 +24,12 @@ const PostSchema = new Schema(
     image: {
       type: String,
       default: ''
-    }
+    },
+
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
