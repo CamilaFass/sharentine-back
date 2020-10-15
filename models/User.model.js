@@ -20,10 +20,11 @@ const UserSchema = new Schema(
       type: String,
       required: [true]
     },
-    image: {
+    location: {
       type: String,
-      default: ''
-    }
+      trim: false
+    },
+    image: String
   },
   { timestamps: true }
 );

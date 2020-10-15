@@ -17,4 +17,6 @@ require('./configs/passport.config')(app);
 
 app.use('/api', authRouter);
 
+app.use('/api', require('./routes/file-upload-routes'));
+
 app.listen(5000, () => console.log('running at port 5000'));
