@@ -10,8 +10,8 @@ const UserSchema = new Schema(
 
     lastName: {
       type: String,
-      trim: true,
-      required: [false]
+      trim: true
+      // default: ''
     },
 
     email: {
@@ -30,11 +30,13 @@ const UserSchema = new Schema(
     location: {
       type: String,
       trim: false
+      // default: ''
     },
 
     image: {
       type: String,
-      default: ''
+      default: (src =
+        'https://res.cloudinary.com/dbthudmai/image/upload/v1602808218/defaultAvatar_iebqlk.png')
     },
 
     posts: [
