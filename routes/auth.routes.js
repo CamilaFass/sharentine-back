@@ -81,7 +81,8 @@ router.post('/login', async (req, res, next) => {
           email: user.email,
           name: user.name,
           lastName: user.lastName,
-          location: user.location
+          location: user.location,
+          image: user.image
         };
         const token = jwt.sign({ user: body }, process.env.TOKEN_SIGN_SECRET);
 

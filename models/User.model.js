@@ -35,7 +35,8 @@ const UserSchema = new Schema(
 
     image: {
       type: String,
-      default: ''
+      default: (src =
+        'https://res.cloudinary.com/dbthudmai/image/upload/v1602808218/defaultAvatar_iebqlk.png')
     },
 
     posts: [
