@@ -9,7 +9,7 @@ const CommentSchema = new Schema(
       required: [true],
     },
 
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
