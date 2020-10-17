@@ -15,7 +15,7 @@ router.post("/comment/:userId/:postId", passport.authenticate("jwt", { session: 
 
     const { userId } = req.params;
 
-    const resultComment = await Comment.create({...req.body, userId: userId});
+    const resultComment = await Comment.create({...req.body, user: userId});
 
     const resultPost = await Post.findOneAndUpdate({ _id: req.params.postId }, { $push: { comments: resultComment._id } }, { new: true });
 
