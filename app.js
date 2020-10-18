@@ -7,7 +7,7 @@ const app = express();
 
 // Configura o app para entender requisições com tipo de corpo JSON
 app.use(express.json());
-app.use(cors({ origin: process.env.CORS }));
+app.use(cors()); //{ origin: process.env.CORS }
 
 const authRouter = require("./routes/auth.routes");
 const postRouter = require("./routes/post.routes");
