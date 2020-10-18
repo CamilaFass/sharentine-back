@@ -6,6 +6,8 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const uploader = require('../configs/cloudinary.config');
 const User = require('../models/User.model');
+const { ObjectId } = require('mongoose').Types;
+const Post = require('../models/Post.model');
 
 //Rota de signup:
 router.post('/signup', async (req, res) => {
@@ -159,13 +161,20 @@ router.delete(
     try {
       const { id } = req.params;
 
-      const result = await User.deleteOne({ _id: id });
+      //findOne no req.params, buscar user.posts, popular array com os posts e fazer solicitação do post.deleteMany
+      const user = await User.findOne({ _id: ObjectId(id) });
+      const posts = user.posts;
+      const postResult = await Post.deleteMany({
+        _id: posts
+      });
+      // console.log('TESTE PARAMS', result);
+      const result = await User.deleteOne({ _id: ObjectId(id) });
 
       console.log(result);
 
       return res.status(200).json({});
     } catch (err) {
-      return res.status(500).json({ msg: 'Internal server error' });
+      return res.status(500).json({ msg: err.message });
     }
   }
 );
