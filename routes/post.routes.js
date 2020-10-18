@@ -31,7 +31,7 @@ router.get("/post", passport.authenticate("jwt", { session: false }), async (req
   try {
     const result = await Post.find()
       .populate("userId")
-      .populate({ path: "comments", model: "Comment", populate: { path: "user", model:'User' } });
+      .populate({ path: "comments", model: "Comment", populate: { path: "user", model: "User" } });
 
     if (result) {
       return res.status(200).json(result);
@@ -47,7 +47,11 @@ router.get("/post/:userId", passport.authenticate("jwt", { session: false }), as
   try {
     console.log("TESTE", req.params.userId);
     const id = req.params.userId;
-    const result = await User.findOne({ _id: id }).populate("posts");
+    const result = await User.findOne({ _id: id }).populate({
+      path: "posts",
+      model: "Post",
+      populate: { path: "comments", model: "Comment", populate: { path: "user", model: "User" } },
+    });
     console.log("TESTANDO", result);
     if (result) {
       return res.status(200).json(result);
