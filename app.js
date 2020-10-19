@@ -18,6 +18,16 @@ require("./configs/db.config");
 
 require("./configs/passport.config")(app);
 
+app.use(express.static(path.join(__dirname, "/public")));
+app.get("*", (req, res, next) => {
+  const hostUrl = req.originalUrl;
+  if (!hostUrl.includes("/api")) {
+    console.log(hostUrl);
+    return res.sendFile(path.join(publicPath, "index.html"));
+  }
+  return next();
+});
+
 app.use("/api", authRouter);
 app.use("/api", postRouter);
 app.use("/api", commentRouter);
@@ -28,13 +38,4 @@ app.listen(process.env.PORT, () =>
   console.log(`running at port ${process.env.PORT}`)
 );
 
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use(express.static(path.join(__dirname, "/public")));
-app.use((req, res, next) => {
-  const hostUrl = req.get("host");
-  if (hostUrl.includes("/api") === true) {
-    return res.sendFile(__dirname + "/public/index.html");
-  }
-  return;
-});
+// app.use(express.static(path.join(__dirname, "public")));
