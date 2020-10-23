@@ -29,6 +29,7 @@ router.post("/signup", async (req, res) => {
   }
 
   if (Object.keys(errors).length) {
+    console.log(errors);
     return res.status(400).json({ errors });
   }
 
